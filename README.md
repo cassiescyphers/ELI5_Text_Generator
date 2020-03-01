@@ -4,7 +4,7 @@ ELI5
 A play model that will generate text from question on the Explain Like I'm Subreddit about machine learning
 
 Project Organization
-------------
+--------------
 
 ├── LICENSE
 ├── Makefile           <- Makefile with commands like `make data` or `make train`
