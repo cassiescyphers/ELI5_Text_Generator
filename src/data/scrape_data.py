@@ -1,12 +1,8 @@
 import praw
 import sys
 import pandas as pd
-#import datetime as dt
 import os 
 import yaml
-#import yaml
-#import numpy as np
-#import pickle
 
 
 SEARCH_TERMS = ['machine learning',
@@ -18,18 +14,17 @@ SEARCH_TERMS = ['machine learning',
                 'a.i.', 
                 'ai']
 
+
+
 class RedditCrawler:
-    def __init__(self, keys_file):
+    def __init__(self):
         self.search_terms = SEARCH_TERMS
-        self.keys_file = keys_file
+        self.keys_file = '../../keys/reddit_keys.yml'
         self.keys = self._load_keys()
         self.subreddit = self._initialize_subreddit_scraper()
         
     def _load_keys(self):
-        try:
-            keys = self._load_yaml()
-        except FileNotFoundError:
-            raise("Keys file not found.")
+        keys = self._load_yaml()
 
         return keys
 
@@ -82,8 +77,8 @@ class RedditCrawler:
 
         return df
 
-def main(output_dir, keys_file):
-    crawler = RedditCrawler(keys_file)
+def main(output_dir):
+    crawler = RedditCrawler()
     
     print('Finding relevant threads')
     eli5_ml_threads = crawler.find_relevant_threads()
@@ -94,8 +89,7 @@ def main(output_dir, keys_file):
                          
 if __name__ == '__main__':
     output_dir = sys.argv[1]
-    keys_file = sys.argv[2]
-    main(output_dir, keys_file)
+    main(output_dir)
     
     
     
