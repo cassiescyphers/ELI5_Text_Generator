@@ -20,7 +20,7 @@ SEARCH_TERMS = ['machine learning',
 def find_relevant_threads(subreddit):
     all_submissions = []
     for sub_query in SEARCH_TERMS:
-        search_results = subreddit.search(sub_query, 
+        search_results = subreddit.search('title:"{}"'.format(sub_query), 
                                           sort='new', 
                                           time_filter='all', 
                                           limit=None)
@@ -65,6 +65,7 @@ def main(output_dir, keys_file):
     
     print('Finding relevant threads')
     eli5_ml_threads = find_relevant_threads(crawler.subreddit)
+    print('found {} threads'.format(len(eli5_ml_threads)))
             
     print('saving submission lookup table to {}'.format(output_dir))
     submission_df = load_submission_ids_into_df(eli5_ml_threads)
